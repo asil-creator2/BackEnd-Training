@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require('express');
 const mongoose = require('mongoose');
 // 1. Initialize dotenv immediately after your core imports
@@ -13,19 +12,6 @@ app.use(express.json());
 
 // 2. Access your variable 
 const uri = process.env.DATABASE_URL;
-
-=======
-const express = require('express')
-const app = express()
-const mongoose = require('mongoose')
-const userSchema = require('./models/user.schema')
-const userRouter = require('./routers/users.router.cjs')
-
-app.use(express.json())
-
-// 🔐 (Better: move this to .env later)
-const uri = "mongodb+srv://icasil2011_db_user:VCfatpxvmacRPikM@cluster0.ltnzujw.mongodb.net/E-commerce"
->>>>>>> 31cb1a0b38f81ffa218affd120ad17fac9174e75
 
 // Connect to DB
 const connectToDB = async () => {
