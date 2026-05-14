@@ -27,11 +27,8 @@ const connectToDB = async () => {
 connectToDB()
 
 app.use('/' , userRouter)
-<<<<<<< HEAD
 app.use('/' , projectRouter)
 app.use('/', teamRouter)
-=======
->>>>>>> 31cb1a0b38f81ffa218affd120ad17fac9174e75
 
 app.use(function(res,req) {
     res.status(404).send({url : req.originalUrl + ' Not Found'})
