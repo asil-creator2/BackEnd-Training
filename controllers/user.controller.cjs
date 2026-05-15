@@ -16,7 +16,7 @@ exports.register = async (req, res) => {
 exports.login = async (req,res) => {
     try{
         let user = await userModel.findOne({email : req.body.email})
-        if (!user || !user.comparePassword(req.body.password)) {
+        if (!user || !(await user.comparePassword(req.body.password))) {
             return res.status(401).json({message : "Invalid email or Password"})
         }
 

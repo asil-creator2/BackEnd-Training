@@ -5,7 +5,7 @@ const projectModel = require('../models/project.schema')
 // Get All Projects
 exports.getAllProjects = async (req,res) => {
     try{
-        const projects = await bookSchema.find()
+        const projects = await projectModel.find()
         res.json({message: "Done" , status : 200 , data : projects})
     }catch(err){
         res.status(404).json({message: "Something went wrong", error : err})
@@ -26,6 +26,7 @@ exports.createProject = async (req, res) => {
     try{
         if (req.user.role.toLowerCase() === 'admin'){
             const newProject = new projectModel(req.body)
+            await newProject.save()
             res.json({message: "Project Created Successfully" , status : 200 , data : newProject})
         }else {
             res.json({message: "You don't have permission", status : 403 , error : err})

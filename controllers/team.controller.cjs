@@ -24,6 +24,7 @@ exports.getOneMember = async (req, res) => {
 exports.createMember = async (req,res) => {
     try{
         const newMember = new memberSchema(req.body)
+        await newMember.save()
         res.json({message:"Member added Successfully" , status: 200 , member : newMember})
     } catch (err) {
         console.log("err : " , err)
