@@ -1,9 +1,11 @@
-const userModel = require('../models/user.schema.js')
+const userSchema = require('../models/user.schema.js')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+
+
 exports.register = async (req, res) => {
     try{
-        let newUser = new userModel(req.body)
+        let newUser = new userSchema(req.body)
         const hashedPassword = await bcrypt.hash(req.body.password , 10)
         newUser.password = hashedPassword
         let user = await newUser.save()
@@ -15,7 +17,7 @@ exports.register = async (req, res) => {
 
 exports.login = async (req,res) => {
     try{
-        let user = await userModel.findOne({email : req.body.email})
+        let user = await userSchema.findOne({email : req.body.email})
         if (!user || !(await user.comparePassword(req.body.password))) {
             return res.status(401).json({message : "Invalid email or Password"})
         }

@@ -1,16 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// 1. Initialize dotenv immediately after your core imports
+// 1. Initialize dotenv immediately after the core imports
 require('dotenv').config(); 
 
-const userSchema = require('./models/user.schema');
 const userRouter = require('./routers/users.router.cjs');
 const projectRouter = require('./routers/projects.router.cjs')
 const teamRouter = require('./routers/team.router.cjs')
 const app = express();
 app.use(express.json());
 
-// 2. Access your variable 
+// 2. Access database variable 
 const uri = process.env.DATABASE_URL;
 
 // Connect to DB
@@ -35,6 +34,6 @@ app.use(function(res,req) {
 })
 
 // Start server
-app.listen(4000, () => {
-    console.log("🚀 Server running on http://localhost:4000")
+app.listen(5000, () => {
+    console.log("🚀 Server running on http://localhost:5000")
 })

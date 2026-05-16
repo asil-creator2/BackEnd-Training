@@ -1,11 +1,11 @@
-const projectModel = require('../models/project.schema')
+const projectSchema = require('../models/project.schema')
 
 
 
 // Get All Projects
 exports.getAllProjects = async (req,res) => {
     try{
-        const projects = await projectModel.find()
+        const projects = await projectSchema.find()
         res.json({message: "Done" , status : 200 , data : projects})
     }catch(err){
         res.status(404).json({message: "Something went wrong", error : err})
@@ -15,7 +15,7 @@ exports.getAllProjects = async (req,res) => {
 // Get One Project
 exports.getOneProject = async(req, res) => {
     try{
-        const project = await projectModel.findOne({_id : req.params.id})
+        const project = await projectSchema.findOne({_id : req.params.id})
     }catch(err){
         res.status(404).json({message: "Something went wrong", error : err})
     }
@@ -25,7 +25,7 @@ exports.getOneProject = async(req, res) => {
 exports.createProject = async (req, res) => {
     try{
         if (req.user.role.toLowerCase() === 'admin'){
-            const newProject = new projectModel(req.body)
+            const newProject = new projectSchema(req.body)
             await newProject.save()
             res.json({message: "Project Created Successfully" , status : 200 , data : newProject})
         }else {
@@ -39,7 +39,7 @@ exports.createProject = async (req, res) => {
 // Update a Project
 exports.updateProject = async (req,res) => {
     try{
-        const project = await projectModel.findByIdAndUpdate(req.params.id , req.body)
+        const project = await projectSchema.findByIdAndUpdate(req.params.id , req.body)
         res.json({message: "Done" , status : 200 , data : []})
     }catch(err){
         res.json({message: "Something went wrong",status : 404, error : err})
@@ -50,7 +50,7 @@ exports.updateProject = async (req,res) => {
 exports.deleteProject = async (req,res) => {
     try{
         if (req.user.role.toLowerCase() === 'admin'){
-            await projectModel.findByIdAndDelete(req.params.id)
+            await projectSchema.findByIdAndDelete(req.params.id)
             res.json({message : "Project Deleted Successfully" , status : 200 , data : []})
         }else {
             res.json({message: "You don't have permission", status : 403 , error : err})
