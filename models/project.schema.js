@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 
 const projectsSchema = new Schema({
     title : String ,
-    discription : String,
+    description : String,
     fullDescription : String,
     liveDemo: String,
     github:String,
