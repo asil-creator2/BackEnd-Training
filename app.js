@@ -29,7 +29,7 @@ app.use('/' , userRouter)
 app.use('/' , projectRouter)
 app.use('/', teamRouter)
 
-app.use(function(res,req) {
+app.use(function(req,res) {
     res.status(404).send({url : req.originalUrl + ' Not Found'})
 })
 
